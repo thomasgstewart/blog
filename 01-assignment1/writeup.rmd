@@ -1,0 +1,19 @@
+---
+title: "Assignment 1"
+output: html_document
+date: "2022-08-25"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## This is assignment 1
+
+Here is my plot of data.
+
+```{r}
+hist(rexp(1000))
+```
