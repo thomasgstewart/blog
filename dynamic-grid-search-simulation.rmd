@@ -1,5 +1,7 @@
 ---
-output: md_document
+output: 
+  md_document:
+    variant: gfm
 ---
 
 <script type="text/javascript" id="MathJax-script" async
@@ -31,6 +33,7 @@ V[y|\text{trt}] &= \sigma^2\\
 \sigma &\sim \text{exponential}(\theta_{\sigma}).
 \end{aligned}
 $$
+
 
 The parameter $\theta_{\beta_1}$ can be selected/calibrated so that the trial has a type I error rate of 5%.
 
