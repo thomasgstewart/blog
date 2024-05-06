@@ -84,11 +84,11 @@ time for the simulation is 28 hours!
 Note that most of the iterations are not relevant to the goal of
 calibrating the prior. Suppose $\tilde{\phi}$ is the target standard
 deviation; the value which results in a type I error rate of 0.05. The
-type I error rate for other priors, say $\dot{phi}$, is not a key
+type I error rate for other priors, say $\dot{\phi}$, is not a key
 concern. Spending thousands of computational iterations at $\dot{\phi}$
 isn’t needed because it isn’t the target.
 
-![](dynamic-grid-search-simulation_files/figure-gfm/unnamed-chunk-3-1.svg)<!-- -->
+<img src="dynamic-grid-search-simulation_files/figure-gfm/unnamed-chunk-3-1.svg" width="75%" />
 
 An adaptive grid search reduces the number of iterations by periodically
 estimating the relationship between $\phi$ and type I error so that
