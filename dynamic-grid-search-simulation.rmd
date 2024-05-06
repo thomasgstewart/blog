@@ -84,7 +84,9 @@ The double loop over values of $\theta_{\beta_1}$ and the number of replicates i
 
 $$\tilde{\theta}_{\beta_1}$$
 
-Note that most of the iterations are not relevant to the goal of calibrating the prior.  Suppose $\tilde{\theta}_{\beta_1}$ is the target standard deviation; the value which results in a type I error rate of 0.05.  The type I error rate for other priors, say $\dot{\theta}_{\beta_1}$, is not a key concern.  Spending thousands of computational iterations at $\dot{\theta}_{\beta_1}$ isn't needed because it isn't the target.
+$$\mathring{\theta}_{\beta_1}$$
+
+$\mathring{\theta}_{\beta_1}$ in a sentence with $\mathring{\theta}_{\beta_1}$.  Note that most of the iterations are not relevant to the goal of calibrating the prior.  Suppose $\tilde{\theta}_{\beta_1}$ is the target standard deviation; the value which results in a type I error rate of 0.05.  The type I error rate for other priors, say $\dot{\theta}_{\beta_1}$, is not a key concern.  Spending thousands of computational iterations at $\dot{\theta}_{\beta_1}$ isn't needed because it isn't the target.
 
 ```{r}
 curve(pnorm(x,3,1), 0, 6, axes = FALSE, ylab = "Type I error", xlab = expression(theta[beta[1]]), lwd = 5, ylim = c(-0.1,1.1))
