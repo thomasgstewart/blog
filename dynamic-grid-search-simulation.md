@@ -1,3 +1,16 @@
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: { autoNumber: "all" },
+      tagSide: "right"
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    }
+  });
+</script>
 <script type="text/javascript" id="MathJax-script" async
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
 </script>
@@ -7,7 +20,7 @@
 When designing a clinical trial, a key task is to demonstrate the
 operating characteristics of the proposed design. This is especially
 important for trials designed using Bayesian methods because such
-methods do not have built-in type I error control like $$p$$-value
+methods do not have built-in type I error control like $p$-value
 methods.
 
 One approach for calibrating a Bayesian design to have type I error
