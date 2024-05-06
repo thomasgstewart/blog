@@ -1,20 +1,3 @@
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    TeX: {
-      equationNumbers: { autoNumber: "all" },
-      tagSide: "right"
-    },
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-      processEscapes: true
-    }
-  });
-</script>
-<script type="text/javascript" id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
-
 # Simultaneous parameter search and simulation
 
 When designing a clinical trial, a key task is to demonstrate the
@@ -74,34 +57,6 @@ To find the error-calibrated $\theta_{\beta_1}$, a common
 general-purpose approach is simulation. The figure below is a common
 approach for finding the error rate for several values of
 $\theta_{\beta_1}$.
-
-``` tex
-\tikzset{>=latex}
-\usetikzlibrary{positioning}
-\usetikzlibrary{fit}
-\begin{tikzpicture}
-\tikzstyle{block}=[thick, text width=3cm, align=center]
-    
-    % Nodes
-    \node[draw, block] (A) {Generate data with $\beta_1=0$};
-    \node[draw, right=of A, block] (B) {Analyze data with $\theta_{\beta_1}$ prior};
-    \node[draw, right=of B, block] (C) {Apply decision rule};
-    
-    % Arrows
-    \draw[->, ultra thick] (A) -- (B);
-    \draw[->, ultra thick] (B) -- (C);
-
-    \node[draw, fit=(A) (B) (C), inner sep=10pt, very thick] (box) {};
-    \node[anchor=south west] at (box.north west) {Repeat many 1000s times};
-
-    \node[right=of C] (D) {Error rate = Proportion which conclude difference};
-
-    \draw[->, ultra thick] (box) -- (D);
-
-    \node[draw, fit=(D) (box), inner sep=3em, ultra thick] (obox) {};
-    \node[anchor=south west] at (obox.north west) {Repeat for many choices of $\theta_{\beta_1}$};
-\end{tikzpicture}
-```
 
 ![](dynamic-grid-search-simulation_files/figure-gfm/unnamed-chunk-2-1.svg)<!-- -->
 

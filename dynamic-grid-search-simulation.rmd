@@ -4,23 +4,6 @@ output: #html_document
      variant: gfm
 ---
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    TeX: {
-      equationNumbers: { autoNumber: "all" },
-      tagSide: "right"
-    },
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-      processEscapes: true
-    }
-  });
-</script>
-<script type="text/javascript" id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
-
 ```{r, include = FALSE}
 knitr::opts_chunk$set(dev = 'svg')
 ```
@@ -63,7 +46,7 @@ The choice of $0.95$ as a decision threshold is somewhat arbitrary.  Sometimes $
 
 To find the error-calibrated $\theta_{\beta_1}$, a common general-purpose approach is simulation.  The figure below is a common approach for finding the error rate for several values of $\theta_{\beta_1}$.
 
-```{tikz, engine.opts=list(dvisvgm.opts = "--font-format=woff")}
+```{tikz, engine.opts=list(dvisvgm.opts = "--font-format=woff"), echo = FALSE}
 \tikzset{>=latex}
 \usetikzlibrary{positioning}
 \usetikzlibrary{fit}
