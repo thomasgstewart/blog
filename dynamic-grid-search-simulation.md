@@ -20,7 +20,7 @@
 When designing a clinical trial, a key task is to demonstrate the
 operating characteristics of the proposed design. This is especially
 important for trials designed using Bayesian methods because such
-methods do not have built-in type I error control like $`p`$-value
+methods do not have built-in type I error control like $p$-value
 methods.
 
 One approach for calibrating a Bayesian design to have type I error
