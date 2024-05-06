@@ -45,10 +45,10 @@ difference in means example, the Bayesian decision making quantity can
 be the posterior probability of efficacy, $P(\beta_1>0|y, \text{trt})$.
 For example, the rule might be
 
-| $P(\beta_1>0|y, \text{trt})$ | Decision                    |
-|:----------------------------:|:----------------------------|
-|         $\geq 0.95$          | Conclusive difference       |
-|           $< 0.95$           | Not a conclusive difference |
+| $P(\beta_1>0\vert y, \text{trt})$ | Decision                    |
+|:---------------------------------:|:----------------------------|
+|            $\geq 0.95$            | Conclusive difference       |
+|             $< 0.95$              | Not a conclusive difference |
 
 The choice of $0.95$ as a decision threshold is somewhat arbitrary.
 Sometimes $0.99$ or $0.999$ is the threshold. Regardless, the value of
