@@ -83,6 +83,8 @@ seconds per iteration, the total time for the simulation is 28 hours!
 
 ## Adaptive grid search
 
+$$\tilde{\theta}_{\beta_1}$$
+
 Note that most of the iterations are not relevant to the goal of
 calibrating the prior. Suppose $\tilde{\theta}_{\beta_1}$ is the target
 standard deviation; the value which results in a type I error rate of
