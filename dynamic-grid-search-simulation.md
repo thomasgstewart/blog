@@ -88,36 +88,10 @@ type I error rate for other priors, say $\dot{phi}$, is not a key
 concern. Spending thousands of computational iterations at $\dot{\phi}$
 isn’t needed because it isn’t the target.
 
-``` r
-curve(pnorm(x,3,1), 0, 6, axes = FALSE, ylab = "Type I error", xlab = expression(phi), lwd = 5, ylim = c(-0.1,1.1))
-box()
-target <- qnorm(0.05,3,1)
-lines(c(target,target),c(0,0.05),col = "gray80", lwd = 5)
-lines(c(0,target),c(0.05,0.05),col = "gray80", lwd = 5)
-points(target,0.05,pch = 16, cex = 2)
-axis(1,at=target,label = expression(tilde(phi)))
-axis(1, 4, expression(dot(phi)))
-```
-
 ![](dynamic-grid-search-simulation_files/figure-gfm/unnamed-chunk-3-1.svg)<!-- -->
 
 An adaptive grid search reduces the number of iterations by periodically
 estimating the relationship between $\phi$ and type I error so that
 values nearest the best guess of the target are prioritized.
-
-``` r
-curve(pnorm(x,3,1), 0, 6, axes = FALSE, ylab = "Type I error", xlab = expression(phi), lwd = 5, ylim = c(-0.1,1.1))
-box()
-target <- qnorm(0.05,3,1)
-lines(c(target,target),c(0,0.05),col = "gray80", lwd = 5)
-lines(c(0,target),c(0.05,0.05),col = "gray80", lwd = 5)
-points(target,0.05,pch = 16, cex = 2)
-axis(1,at=target,label = expression(tilde(phi)))
-axis(1, 4, expression(dot(phi)))
-u2 <- VGAM::rlaplace(1000,target,.5)
-tgsify::histrug(u2[u2<6&u2>0], axis = 1, col = "#AA4A4450")
-u1 <- rep(ppoints(20)*6,100)
-z <- tgsify::histrug(u1, 5, col = "#00008080")
-```
 
 ![](dynamic-grid-search-simulation_files/figure-gfm/unnamed-chunk-4-1.svg)<!-- -->

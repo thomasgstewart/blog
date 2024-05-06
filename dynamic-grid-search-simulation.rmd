@@ -6,6 +6,7 @@ output: #html_document
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(dev = 'svg')
+knitr::opts_chunk$set(echo = FALSE, fig.width=15, fig.height=5)
 ```
 
 # Simultaneous parameter search and simulation
