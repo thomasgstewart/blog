@@ -26,13 +26,13 @@ E[y|\text{trt}] &= \beta_0 + \beta_1 \text{trt}\\
 V[y|\text{trt}] &= \sigma^2\\
 \ \\
 \beta_0 &\sim N(0,\theta_{\beta_0})\\
-\beta_1 &\sim N(0,\theta_{\beta_1})\\
+\beta_1 &\sim N(0,\theta_{\beta_1}) (\text{for notational simplicity, let } \phi = \theta_{\beta_1})\\
 \sigma &\sim \text{exponential}(\theta_{\sigma}).
 \end{aligned}
 $$
 
-The parameter $\theta_{\beta_1}$ can be selected/calibrated so that the
-trial has a type I error rate of 5%.
+The parameter $\phi$ = $\theta_{\beta_1}$ can be selected/calibrated so
+that the trial has a type I error rate of 5%.
 
 Type I error is inherently linked to the decision-making strategy for
 the trial. The decision-making strategy is a rule or set of rules which
@@ -48,15 +48,14 @@ For example, the rule might be
 
 The choice of $0.95$ as a decision threshold is somewhat arbitrary.
 Sometimes $0.99$ or $0.999$ is the threshold. Regardless, the value of
-$\theta_{\beta_1}$ needs to be selected so that whatever the threshold
-is, type I error is 0.05.
+$\phi$ needs to be selected so that whatever the threshold is, type I
+error is 0.05.
 
 ## Grid search
 
-To find the error-calibrated $\theta_{\beta_1}$, a common
-general-purpose approach is simulation. The figure below is a common
-approach for finding the error rate for several values of
-$\theta_{\beta_1}$.
+To find the error-calibrated $\phi$, a common general-purpose approach
+is simulation. The figure below is a common approach for finding the
+error rate for several values of $\phi$.
 
 ![](dynamic-grid-search-simulation_files/figure-gfm/unnamed-chunk-2-1.svg)<!-- -->
 
@@ -69,66 +68,52 @@ collected in the trial. Because type I error is of interest, the
 pseudo-dataset is generated so that the outcome distributions are the
 same for active and placebo groups. That is, the data are generated with
 a treatment effect of zero, ($\beta_1=0$). Then, the dataset is analyzed
-with the specific value of $\theta_{\beta_1}$ and the treatment effect
-is estimated and the decision-making quantity is calculated. The type I
-error rate is the proportion of datasets which resulted in a conclusive
-difference, contrary to the true underlying equality of active and
-placebo groups.
+with the specific value of $\phi$ and the treatment effect is estimated
+and the decision-making quantity is calculated. The type I error rate is
+the proportion of datasets which resulted in a conclusive difference,
+contrary to the true underlying equality of active and placebo groups.
 
-The double loop over values of $\theta_{\beta_1}$ and the number of
-replicates is computationaly costly. If there are 10 possible
-$\theta_{\beta_1}$ values and the number of replicates is 5000, the
-total number of iterations is $10\times 5000$ = 50000. If it takes 2
-seconds per iteration, the total time for the simulation is 28 hours!
+The double loop over values of $\phi$ and the number of replicates is
+computationaly costly. If there are 10 possible $\phi$ values and the
+number of replicates is 5000, the total number of iterations is
+10$\times$ 5000 = 50000. If it takes 2 seconds per iteration, the total
+time for the simulation is 28 hours!
 
 ## Adaptive grid search
 
-$$\tilde{\theta}_{\beta_1}$$
-
-$$\mathring{\theta}_{\beta_1}$$
-
-$\dot{\theta}_{\beta_1}$ in a sentence with $\dot{\theta}_{\beta_1}$.
 Note that most of the iterations are not relevant to the goal of
-calibrating the prior. Suppose $\tilde{\theta}_{\beta_1}$ is the target
-standard deviation; the value which results in a type I error rate of
-0.05. The type I error rate for other priors, say
-$\dot{\theta}_{\beta_1}$, is not a key concern. Spending thousands of
-computational iterations at $\dot{\theta}_{\beta_1}$ isn’t needed
-because it isn’t the target.
+calibrating the prior. Suppose $\tilde{\phi}$ is the target standard
+deviation; the value which results in a type I error rate of 0.05. The
+type I error rate for other priors, say $\dot{phi}$, is not a key
+concern. Spending thousands of computational iterations at $\dot{\phi}$
+isn’t needed because it isn’t the target.
 
 ``` r
-curve(pnorm(x,3,1), 0, 6, axes = FALSE, ylab = "Type I error", xlab = expression(theta[beta[1]]), lwd = 5, ylim = c(-0.1,1.1))
+curve(pnorm(x,3,1), 0, 6, axes = FALSE, ylab = "Type I error", xlab = expression(phi), lwd = 5, ylim = c(-0.1,1.1))
 box()
 target <- qnorm(0.05,3,1)
 lines(c(target,target),c(0,0.05),col = "gray80", lwd = 5)
 lines(c(0,target),c(0.05,0.05),col = "gray80", lwd = 5)
 points(target,0.05,pch = 16, cex = 2)
-axis(1,at=target,label = expression(tilde(theta)[beta[1]]))
-axis(1, 4, expression(dot(theta)[beta[1]]))
+axis(1,at=target,label = expression(tilde(phi)))
+axis(1, 4, expression(dot(phi)))
 ```
 
 ![](dynamic-grid-search-simulation_files/figure-gfm/unnamed-chunk-3-1.svg)<!-- -->
 
-``` r
-#u2 <- VGAM::rlaplace(1000,target,.5)
-#tgsify::histrug(u2[u2<6&u2>0], axis = 1, col = "#AA4A4450")
-#u1 <- rep(ppoints(20)*6,100)
-#z <- tgsify::histrug(u1, 5, col = "#00008080")
-```
-
 An adaptive grid search reduces the number of iterations by periodically
-estimating the relationship between $\theta_{\beta_1}$ and type I error
-so that values nearest the best guess of the target are prioritized.
+estimating the relationship between $\phi$ and type I error so that
+values nearest the best guess of the target are prioritized.
 
 ``` r
-curve(pnorm(x,3,1), 0, 6, axes = FALSE, ylab = "Type I error", xlab = expression(theta[beta[1]]), lwd = 5, ylim = c(-0.1,1.1))
+curve(pnorm(x,3,1), 0, 6, axes = FALSE, ylab = "Type I error", xlab = expression(phi), lwd = 5, ylim = c(-0.1,1.1))
 box()
 target <- qnorm(0.05,3,1)
 lines(c(target,target),c(0,0.05),col = "gray80", lwd = 5)
 lines(c(0,target),c(0.05,0.05),col = "gray80", lwd = 5)
 points(target,0.05,pch = 16, cex = 2)
-axis(1,at=target,label = expression(tilde(theta)[beta[1]]))
-axis(1, 4, expression(dot(theta)[beta[1]]))
+axis(1,at=target,label = expression(tilde(phi)))
+axis(1, 4, expression(dot(phi)))
 u2 <- VGAM::rlaplace(1000,target,.5)
 tgsify::histrug(u2[u2<6&u2>0], axis = 1, col = "#AA4A4450")
 u1 <- rep(ppoints(20)*6,100)
@@ -136,5 +121,3 @@ z <- tgsify::histrug(u1, 5, col = "#00008080")
 ```
 
 ![](dynamic-grid-search-simulation_files/figure-gfm/unnamed-chunk-4-1.svg)<!-- -->
-
-Suppose $\theta_{\beta_1} = 0.5$
